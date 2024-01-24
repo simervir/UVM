@@ -1,0 +1,61 @@
+List of Design Features
+----------------------------------------
+ID:Design Feature
+----------------------------------------
+1: Design routes data from data_in to data_out
+
+2: rcv_rdy is 1111 indicating ports are ready to recieve data. 
+
+3: valid_in sends valid data to each port 
+
+4: Each port is assigned 4 bits of addr_in
+
+
+List of Constraints
+----------------------------------------
+ID:Constraints
+----------------------------------------
+1: base Constraints: addr_in must be less than or equal to 3
+        constraint valid_addr{
+            addr_in[3:0] <= 3;
+            addr_in[7:4] <= 3;
+            addr_in[11:8] <= 3;
+            addr_in[15:12] <= 3;
+        }
+2: Addr_in is in order of ports 1-3
+        constraint addr_in_ordered{
+            addr_in[3:0] == 0;
+            addr_in[7:4] == 1;
+            addr_in[11:8] == 2;
+            addr_in[15:12] == 3;
+         }
+
+3: valid_in is all high to recieve data
+        constraint all_valid{
+            data_read == 4'b1111;
+         }
+
+4: Unique Constraints: addr_in ports are all Unique addresses no conflict between them.
+        constraint uniq_addr_in{ unique    {addr_in[3:0] ,
+        addr_in[7:4] ,
+        addr_in[11:8] ,
+        addr_in[15:12]};}
+
+5: Data read: all reads are high to have all ports can read.
+    constraint all_valid{
+            valid_in == 4'b1111;
+         }
+
+
+
+List of Test cases
+----------------------------------------
+ID:Task	Description
+----------------------------------------
+1:base_test: its base test cases randomly generated with addr_in ports less than 4.
+
+2:sanity_check_test: it  test for each addr_in port in order and all ports are a valid.
+
+3:Unique_test: it test with a conflict constraint for all addr_in ports having a unique value.
+
+4:all_read_test: it test all ports can read the data.

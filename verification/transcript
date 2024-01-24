@@ -1,0 +1,7 @@
+# vsim -c top -L /CMC/tools/mentor/questasim_2020.1_1/questasim/uvm-1.2 "+UVM_TESTNAME=port_3_test" -do "coverage save -onexit ./ucdb/port_3_test_fcov.ucdb; run -all;exit;" 
+# Start time: 10:38:03 on Dec 04,2023
+# ** Error (suppressible): (vsim-19) Failed to access library 'work' at "work".
+# No such file or directory. (errno = ENOENT)
+# Error loading design
+# End time: 10:38:04 on Dec 04,2023, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 0
